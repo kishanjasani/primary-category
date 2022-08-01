@@ -75,6 +75,31 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		 */
 		public function register_hooks() {
 			// Register action and filters.
+			add_action( 'init', [ $this, 'primary_category_register_metabox' ] );
+		}
+
+		/**
+		 * Register Primary category metabox.
+		 *
+		 * @since 0.1.0
+		 * @access public
+		 *
+		 * @return void
+		 */
+		public function primary_category_register_metabox() {
+			register_post_meta(
+				'',
+				TENUP_PRIMARY_CATEGORY_META_KEY,
+				[
+					'show_in_rest'      => true,
+					'single'            => true,
+					'type'              => 'string',
+					'sanitize_callback' => 'sanitize_text_field',
+					'auth_callback'     => function() {
+						return current_user_can( 'edit_posts' );
+					},
+				]
+			);
 		}
 	}
 

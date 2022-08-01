@@ -1,0 +1,16 @@
+{
+	"name": "kishanjasani/tenup-primary-category",
+	"type": "wordpress-plugin",
+	"autoload": {
+		"psr-4": {
+			"TenUp_Primary_Category\\": "includes/classes/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Kishan Jasani",
+			"email": "kishanjasani007@yahoo.in"
+		}
+	],
+	"require": {}
+}

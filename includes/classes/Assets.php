@@ -100,6 +100,5 @@ if ( ! class_exists( 'Assets' ) ) {
 
 			wp_enqueue_script( 'tenup-primary-category-meta-block-script' );
 		}
-
 	}
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       Ten Up Primary Category
  * Description:       Allows you to choose primary category from categories to posts

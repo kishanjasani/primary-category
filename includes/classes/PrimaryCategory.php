@@ -35,7 +35,7 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		/**
 		 * Calls the register_hooks function and require_files function.
 		 *
-		 * @since 0.1
+		 * @since 0.1.0
 		 * @access public
 		 *
 		 * @return void
@@ -49,7 +49,7 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		/**
 		 * Returns the current instance of the class.
 		 *
-		 * @since 0.1
+		 * @since 0.1.0
 		 * @access public
 		 * @static
 		 *
@@ -68,14 +68,17 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		/**
 		 * Registers the actions and filters for the plugin.
 		 *
-		 * @since 0.1
+		 * @since 0.1.0
 		 * @access public
 		 *
 		 * @return void
 		 */
 		public function register_hooks() {
-			// Register action and filters.
+			// Register action.
 			add_action( 'init', [ $this, 'primary_category_register_metabox' ] );
+
+			// Register filters.
+			add_filter( 'post_link_category', [ $this, 'register_primary_category_permalinks' ], 10, 3 );
 		}
 
 		/**
@@ -101,6 +104,48 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 				]
 			);
 		}
-	}
 
+		/**
+		 * Filters the category that gets used in the %category% permalink token.
+		 *
+		 * @since 0.1.0
+		 * @access public
+		 *
+		 * @param WP_Term $category The category to use in the permalink.
+		 * @param array   $cats     Array of all categories (WP_Term objects) associated with the post.
+		 * @param WP_Post $post     The post in question.
+		 *
+		 * @return WP_Term
+		 */
+		public function register_primary_category_permalinks( $category, $cats, $post ) {
+
+			$primary_category_slug = $this->get_primary_category( $post );
+
+			if ( ! empty( $primary_category_slug ) ) {
+				return get_category_by_slug( $primary_category_slug );
+			}
+
+			return $category;
+		}
+
+		/**
+		 * Get the id of the primary category.
+		 *
+		 * @since 0.1.0
+		 * @access protected
+		 *
+		 * @param WP_Post $post The post object.
+		 *
+		 * @return int $primary_term Primary category id
+		 */
+		protected function get_primary_category( $post = null ) {
+			if ( empty( $post ) ) {
+				return false;
+			}
+
+			$primary_term = get_post_meta( $post->ID, TENUP_PRIMARY_CATEGORY_META_KEY, true );
+
+			return ! empty( $primary_term ) ? $primary_term : false;
+		}
+	}
 }

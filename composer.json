@@ -12,5 +12,14 @@
 			"email": "kishanjasani007@yahoo.in"
 		}
 	],
-	"require": {}
+	"require-dev": {
+		"phpcompatibility/phpcompatibility-wp": "*",
+		"wp-coding-standards/wpcs": "^2.3",
+		"automattic/vipwpcs": "^2.3"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
 }

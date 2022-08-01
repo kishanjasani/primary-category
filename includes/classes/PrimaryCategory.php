@@ -33,6 +33,20 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		protected static $instance = null;
 
 		/**
+		 * Calls the register_hooks function and require_files function.
+		 *
+		 * @since 0.1
+		 * @access public
+		 *
+		 * @return void
+		 */
+		public function __construct() {
+			Assets::get_instance();
+
+			$this->register_hooks();
+		}
+
+		/**
 		 * Returns the current instance of the class.
 		 *
 		 * @since 0.1
@@ -49,6 +63,18 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 			}
 
 			return self::$instance;
+		}
+
+		/**
+		 * Registers the actions and filters for the plugin.
+		 *
+		 * @since 0.1
+		 * @access public
+		 *
+		 * @return void
+		 */
+		public function register_hooks() {
+			// Register action and filters.
 		}
 	}
 

@@ -1,0 +1,23 @@
+{
+	"name": "primary-category",
+	"version": "0.1.0",
+	"description": "Plugin that adds primary category to posts",
+	"main": "build/index.js",
+	"scripts": {
+		"start": "wp-scripts start",
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip"
+	},
+	"keywords": [
+		"primary-category"
+	],
+	"author": "Kishan Jasani",
+	"license": "ISC",
+	"devDependencies": {
+		"@wordpress/scripts": "^23.6.0"
+	}
+}

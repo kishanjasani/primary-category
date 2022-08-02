@@ -3,7 +3,11 @@
 	"type": "wordpress-plugin",
 	"autoload": {
 		"psr-4": {
-			"TenUp_Primary_Category\\": "includes/classes/",
+			"TenUp_Primary_Category\\": "includes/classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
 			"TenUp_Primary_Category\\Tests\\": "tests"
 		}
 	},

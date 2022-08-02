@@ -80,13 +80,13 @@ if ( ! class_exists( 'Assets' ) ) {
 		}
 
 		/**
-		 * Admin Scripts.
+		 * Register Scripts.
 		 *
 		 * @since 0.1.0
 		 * @access public
 		 * @return void
 		 */
-		public function enqueue_scripts() {
+		public function register_scripts() {
 			$asset_file_path = TENUP_PRIMARY_CATEGORY_PLUGIN_PATH . '/build/index.asset.php';
 			$asset           = is_readable( $asset_file_path ) ? require $asset_file_path : array();
 
@@ -97,7 +97,17 @@ if ( ! class_exists( 'Assets' ) ) {
 				filemtime( TENUP_PRIMARY_CATEGORY_PLUGIN_PATH . '/build/index.js' ),
 				true
 			);
+		}
 
+		/**
+		 * Admin Scripts.
+		 *
+		 * @since 0.1.0
+		 * @access public
+		 * @return void
+		 */
+		public function enqueue_scripts() {
+			$this->register_scripts();
 			wp_enqueue_script( 'tenup-primary-category-meta-block-script' );
 		}
 	}

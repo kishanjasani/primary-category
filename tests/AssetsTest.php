@@ -8,7 +8,6 @@
 namespace TenUp_Primary_Category\Tests;
 
 use TenUp_Primary_Category\Assets;
-use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /**
  * Asstes test case.

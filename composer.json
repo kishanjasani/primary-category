@@ -3,7 +3,8 @@
 	"type": "wordpress-plugin",
 	"autoload": {
 		"psr-4": {
-			"TenUp_Primary_Category\\": "includes/classes/"
+			"TenUp_Primary_Category\\": "includes/classes/",
+			"TenUp_Primary_Category\\Tests\\": "tests"
 		}
 	},
 	"authors": [
@@ -15,7 +16,13 @@
 	"require-dev": {
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"wp-coding-standards/wpcs": "^2.3",
-		"automattic/vipwpcs": "^2.3"
+		"automattic/vipwpcs": "^2.3",
+		"phpunit/phpunit": "^9.5",
+		"yoast/phpunit-polyfills": "^1.0"
+	},
+	"scripts": {
+		"test": "./vendor/bin/phpunit",
+		"setup-local-tests": "bash bin/install-wp-tests.sh primary_category_test root password mysql latest"
 	},
 	"config": {
 		"allow-plugins": {

@@ -25,6 +25,8 @@ npm i
 
 3. Now you should have ability to choose primary category in post category section.
 
+A video walkthrough of the plugin : [link](https://www.loom.com/share/77f7657cbb1b453390d9044a8847f933).
+
 ## Automated Testing
 Setup Unit Test for the development:
 
@@ -34,4 +36,4 @@ Setup Unit Test for the development:
 4. Run `composer run test`
 
 ## Best Practice
-The plugin follows WordPress and WordPress VIP coding standards. You can check the standard configuration inside the `pgpcs.xml.dist` file.
+The plugin follows WordPress and WordPress VIP coding standards. You can check the standard configuration inside the `phpcs.xml.dist` file.

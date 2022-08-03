@@ -162,20 +162,16 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		public function list_post_with_primary_category( $query ) {
 			global $wp, $wp_rewrite;
 
-			$category_name        = $query->get( 'category_name' );
-			$category_permastruct = $wp_rewrite->get_category_permastruct();
+			$category_name = $query->get( 'category_name' );
 
 			if ( ! $category_name ) {
 				return;
 			}
 
-			$category_permalink = str_replace( '/%category%', '', $category_permastruct );
+			$category_permalink = str_replace( '/%category%', '', $wp_rewrite->get_category_permastruct() );
 			$current_url        = home_url( $wp->request );
 
-			/**
-			 * We don't want to alter the behaviour of the main category archives page.
-			 * However, for other pages, we would like to filter the posts to only show posts with the primary category.
-			 */
+			// We don't want to alter the behaviour of the main category archives page.
 			if ( $current_url &&
 				$category_permalink &&
 				false === strpos( $current_url, $category_permalink ) &&
@@ -184,7 +180,7 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 				$query->set(
 					'meta_query',
 					array(
-						'relation' => 'AND', // Use AND for taking result on both condition true.
+						'relation' => 'AND',
 						array(
 							'key'   => TENUP_PRIMARY_CATEGORY_META_KEY,
 							'value' => $category_name,

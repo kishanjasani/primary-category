@@ -11,6 +11,11 @@ Allows you to choose primary category for posts and custom post types.
 
 - Works with posts and custom post types.
 
+- Allows you to filter posts by primary category in frontend.
+Example: Open a custom category page `http://example.com/category-name/`. You will see that, the posts will be filtered by the primary category only.
+
+- Whereas on category archive page, `http://example.com/category/category-name/` You will see all the posts related to that category.
+
 ## Installation
 
 1. Go to WordPress Plugin's Directory and Run the following commands to install plugin:

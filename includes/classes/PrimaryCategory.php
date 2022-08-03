@@ -76,6 +76,7 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 		public function register_hooks() {
 			// Register action.
 			add_action( 'init', [ $this, 'primary_category_register_metabox' ] );
+			add_action( 'pre_get_posts', [ $this, 'list_post_with_primary_category' ] );
 
 			// Register filters.
 			add_filter( 'post_link_category', [ $this, 'register_primary_category_permalinks' ], 10, 3 );
@@ -146,6 +147,51 @@ if ( ! class_exists( 'PrimaryCategory' ) ) {
 			$primary_term = get_post_meta( $post->ID, TENUP_PRIMARY_CATEGORY_META_KEY, true );
 
 			return ! empty( $primary_term ) ? $primary_term : false;
+		}
+
+		/**
+		 * List all post with primary category.
+		 *
+		 * @param object $query Main Query object.
+		 *
+		 * @since 0.1.0
+		 * @access public
+		 *
+		 * @return void
+		 */
+		public function list_post_with_primary_category( $query ) {
+			global $wp, $wp_rewrite;
+
+			$category_name        = $query->get( 'category_name' );
+			$category_permastruct = $wp_rewrite->get_category_permastruct();
+
+			if ( ! $category_name ) {
+				return;
+			}
+
+			$category_permalink = str_replace( '/%category%', '', $category_permastruct );
+			$current_url        = home_url( $wp->request );
+
+			/**
+			 * We don't want to alter the behaviour of the main category archives page.
+			 * However, for other pages, we would like to filter the posts to only show posts with the primary category.
+			 */
+			if ( $current_url &&
+				$category_permalink &&
+				false === strpos( $current_url, $category_permalink ) &&
+				$query->is_main_query()
+			) {
+				$query->set(
+					'meta_query',
+					array(
+						'relation' => 'AND', // Use AND for taking result on both condition true.
+						array(
+							'key'   => TENUP_PRIMARY_CATEGORY_META_KEY,
+							'value' => $category_name,
+						),
+					)
+				);
+			}
 		}
 	}
 }
